@@ -48,6 +48,12 @@
                       "description": "User identifier provided during script initialization (if any)",
                       "example": "user-456"
                     },
+                    "visitor_id": {
+                      "type": "string",
+                      "nullable": true,
+                      "description": "A fingerprint of the user's device; sessions with the same visitor ID likely came from the same device. Currently in beta and `null` unless enabled for your account.",
+                      "example": "1c9f6d5e-2b71-4c3a-8f0d-4e5a6b7c8d9e"
+                    },
                     "tags": {
                       "type": "array",
                       "description": "Tags associated with this session",
@@ -432,6 +438,12 @@
                             "description": "Unique identifier for the session",
                             "example": "abc123def456"
                           },
+                          "visitor_id": {
+                            "type": "string",
+                            "nullable": true,
+                            "description": "A fingerprint of the user's device; sessions with the same visitor ID likely came from the same device. Currently in beta and `null` unless enabled for your account.",
+                            "example": "1c9f6d5e-2b71-4c3a-8f0d-4e5a6b7c8d9e"
+                          },
                           "tags": {
                             "type": "array",
                             "description": "Tags associated with this session",
@@ -719,6 +731,12 @@
                             "type": "string",
                             "description": "Unique identifier for the session",
                             "example": "abc123def456"
+                          },
+                          "visitor_id": {
+                            "type": "string",
+                            "nullable": true,
+                            "description": "A fingerprint of the user's device; sessions with the same visitor ID likely came from the same device. Currently in beta and `null` unless enabled for your account.",
+                            "example": "1c9f6d5e-2b71-4c3a-8f0d-4e5a6b7c8d9e"
                           },
                           "tags": {
                             "type": "array",
