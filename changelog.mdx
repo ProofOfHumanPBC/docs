@@ -6,6 +6,9 @@ description: "Latest updates and improvements to Proof of Human."
 ## July 2026
 
 <AccordionGroup>
+  <Accordion title="New: visitor_id device fingerprinting">
+    Added `visitor_id` to the session, user, and tag API endpoints and to the session details modal on the dashboard. The visitor ID is a fingerprint of the user's device and browser. Sessions with the same visitor ID likely came from the same device, even if the user ID differs.
+  </Accordion>
   <Accordion title="New: Filtering by flag on dashboard">
     Added the ability to filter sessions by flag directly on the dashboard. Clicking a flag in the flags detected table opens the session list filtered to sessions where that flag fired.
   </Accordion>
