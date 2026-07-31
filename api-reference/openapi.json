@@ -51,7 +51,7 @@
                     "visitor_id": {
                       "type": "string",
                       "nullable": true,
-                      "description": "A fingerprint of the user's device; sessions with the same visitor ID likely came from the same device. Currently in beta and `null` unless enabled for your account.",
+                      "description": "A fingerprint of the user's device and browser; sessions with the same visitor ID likely came from the same device. Currently in beta.",
                       "example": "1c9f6d5e-2b71-4c3a-8f0d-4e5a6b7c8d9e"
                     },
                     "tags": {
@@ -441,7 +441,7 @@
                           "visitor_id": {
                             "type": "string",
                             "nullable": true,
-                            "description": "A fingerprint of the user's device; sessions with the same visitor ID likely came from the same device. Currently in beta and `null` unless enabled for your account.",
+                            "description": "A fingerprint of the user's device and browser; sessions with the same visitor ID likely came from the same device. Currently in beta.",
                             "example": "1c9f6d5e-2b71-4c3a-8f0d-4e5a6b7c8d9e"
                           },
                           "tags": {
@@ -735,7 +735,7 @@
                           "visitor_id": {
                             "type": "string",
                             "nullable": true,
-                            "description": "A fingerprint of the user's device; sessions with the same visitor ID likely came from the same device. Currently in beta and `null` unless enabled for your account.",
+                            "description": "A fingerprint of the user's device and browser; sessions with the same visitor ID likely came from the same device. Currently in beta.",
                             "example": "1c9f6d5e-2b71-4c3a-8f0d-4e5a6b7c8d9e"
                           },
                           "tags": {
