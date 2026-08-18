@@ -3,7 +3,7 @@ title: 'Using the Proof of Human badge'
 sidebarTitle: 'Using the Proof of Human badge'
 ---
 
-Proof of Human's verification badge is a small, drop-in widget that shows whether Proof of Human is running or not. It auto-renders wherever you place `<div class="roundtable-badge">`, listens to your tracker’s events, and gracefully handles SPAs and back-navigation.
+Proof of Human's verification badge is a small, drop-in widget that shows whether Proof of Human is running. It auto-renders wherever you place `<div class="roundtable-badge">`, listens to your tracker’s events, and gracefully handles SPAs and back-navigation.
 
 Note that the badge does *not* display any results related to risk score. Instead, it determines success or failure based on whether the Proof of Human tracking is working correctly.
 
@@ -35,20 +35,20 @@ After importing the badge script, the badge can be added anywhere by adding a di
 
 The badge renders inside a Shadow DOM, so your site’s CSS won’t break it (and vice-versa).
 
-By default, the badge's width is `231px`. We recommend never setting the width less than this value. However, you can control the badge width via a `width` attribute:
+By default, the badge is collapsed to show just the logo. On hover (or tap, on touch devices), it expands its width to reveal the "Proof of Human" text and links.
+
+The badge uses a dark theme by default. For light backgrounds, add `data-theme="light"`:
 
 ```html
-<div class="roundtable-badge" width="300px"></div>
+<div class="roundtable-badge" data-theme="light"></div>
 ```
-
-`width` takes any css width, e.g. `300px`, `100%`, etc.
 
 ## State
 
 At any given time, the badge is in one of three states:
 
 - **Loading:** shows a spinner and an animating progress bar while the tracker initializes and verifies Proof of Human is running.
-- **Pass:** displays a check icon in black. This indicates that Proof of Human is running and gathering user data.
+- **Pass:** displays a check icon. This indicates that Proof of Human is running and gathering user data.
 - **Fail:** displays an X icon in red. This indicates that Proof of Human is not running.
 
 See also:
