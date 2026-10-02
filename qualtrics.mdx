@@ -20,10 +20,10 @@ The simplest way to load Proof of Human across your whole survey is through the 
   var SITE_KEY = 'SITE_KEY';
 
   if (window.__rtLoaded) return;
-  if (document.getElementById('roundtable-rt')) return;
+  if (document.getElementById('poh-script')) return;
 
   var s = document.createElement('script');
-  s.id = 'roundtable-rt';
+  s.id = 'poh-script';
   s.src = 'https://cdn.poh.org/v1/poh.js';
   s.setAttribute('data-site-key', SITE_KEY);
   s.setAttribute('data-tags', 'tag1,tag2');

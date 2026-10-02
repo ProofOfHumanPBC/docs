@@ -25,10 +25,6 @@ This guide shows how to integrate Proof of Human’s bot detection suite into an
 ```
 The Proof of Human tracker dispatches a **`poh:ready`** event on `window` as soon as it is done loading. Block 2 listens for that completion event so you can safely call `window.setPOHUserId` once the tracker is loaded.
 
-<Note>
-The older Roundtable-branded names (`window.setRoundtableUserId`, `window.setRoundtableTags`, `window.getRoundtableSessionId`, and the `roundtable:ready` / `roundtable:session-token` events) still work, and the tracker is still served at `https://cdn.poh.org/v1/rt.js` as well as `poh.js`, so existing integrations do not need to change. New integrations should use the `poh.js` script and the `POH` names shown here.
-</Note>
-
 ### Script‑tag attributes
 
 The tracker recognizes three data‑attributes that let you tailor the tracker's behavior:
