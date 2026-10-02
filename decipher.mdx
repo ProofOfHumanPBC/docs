@@ -30,18 +30,18 @@ To retrieve a respondent's data later, you need their session ID. Add the follow
 ```xml
 <style name="question.after" wrap="ready"><![CDATA[
 function saveSid() {
-  var sid = window.getRoundtableSessionId && window.getRoundtableSessionId();
+  var sid = window.getPOHSessionId && window.getPOHSessionId();
   if (!sid) return false;
-  Survey.setPersistent('client_roundtable_session_id', sid);
+  Survey.setPersistent('client_poh_session_id', sid);
   return true;
 }
 if (!saveSid()) {
-  window.addEventListener('roundtable:ready', saveSid, { once: true });
+  window.addEventListener('poh:ready', saveSid, { once: true });
 }
 ]]></style>
 ```
 
-This gets the session ID with `window.getRoundtableSessionId()` and makes it available server-side as `p.client_roundtable_session_id`.
+This gets the session ID with `window.getPOHSessionId()` and makes it available server-side as `p.client_poh_session_id`.
 
 <Note>
  Attach this code to a question the respondent answers and submits — not to a terminal or exit page.
@@ -49,18 +49,18 @@ This gets the session ID with `window.getRoundtableSessionId()` and makes it ava
 
 ## Retrieving session data
 
-The question code above saves the session ID to `p.client_roundtable_session_id`. To pull the risk score and flags for a respondent back into your survey, call the session report endpoint from a Decipher API node. Place this after the last page you'd like to track.
+The question code above saves the session ID to `p.client_poh_session_id`. To pull the risk score and flags for a respondent back into your survey, call the session report endpoint from a Decipher API node. Place this after the last page you'd like to track.
 
 ### 1. Call the report endpoint
 
 ```xml
 <exec>
-p.Params1  = dict(sessionId=p.get('client_roundtable_session_id', ''))
+p.Params1  = dict(sessionId=p.get('client_poh_session_id', ''))
 p.Headers1 = dict(Authorization="Bearer YOUR_SECRET_KEY")
 </exec>
 
 <logic label="Roundtable_API"
-  cond="p.get('client_roundtable_session_id', '') != ''"
+  cond="p.get('client_poh_session_id', '') != ''"
   api:params="p.Params1"
   api:headers="p.Headers1"
   api:url="https://api.poh.org/v1/sessions/report"

@@ -9,7 +9,7 @@ This guide shows how to add Proof of Human to a Qualtrics survey so that every r
 
 The simplest way to load Proof of Human across your whole survey is through the **Look and Feel** settings. This injects the tracker on every page so you don't have to add it to individual pages.
 
-1. In **Survey Flow**, add an **Embedded Data** element at the top of the flow and create a field named `__js_ROUNDTABLE_SESSION_ID` with no value. The `__js_` prefix is required (see the note below).
+1. In **Survey Flow**, add an **Embedded Data** element at the top of the flow and create a field named `__js_POH_SESSION_ID` with no value. The `__js_` prefix is required (see the note below).
 2. Open your survey and go to **Look and Feel** → **General** → **Header**.
 3. Click the source/HTML (`<>`) button to edit the header as raw HTML.
 4. Paste the following, replacing `SITE_KEY` with your own site key from the [Integration script](https://app.poh.org/account/integration) dashboard page (the public key starts with `pub-`).
@@ -36,17 +36,17 @@ Qualtrics.SurveyEngine.addOnload(function () {
   var pid = "${e://Field/RESPONDENT_ID}";
 
   function init() {
-    if (pid && window.setRoundtableUserId) {
-      window.setRoundtableUserId(pid);
+    if (pid && window.setPOHUserId) {
+      window.setPOHUserId(pid);
     }
-    var sessionId = window.getRoundtableSessionId && window.getRoundtableSessionId();
+    var sessionId = window.getPOHSessionId && window.getPOHSessionId();
     if (sessionId) {
-      Qualtrics.SurveyEngine.setJSEmbeddedData("ROUNDTABLE_SESSION_ID", sessionId);
+      Qualtrics.SurveyEngine.setJSEmbeddedData("POH_SESSION_ID", sessionId);
     }
   }
 
   init();
-  window.addEventListener("roundtable:ready", init, { once: true });
+  window.addEventListener("poh:ready", init, { once: true });
 });
 </script>
 ```
@@ -59,12 +59,12 @@ The `data-tags` value (`tag1,tag2`) are placeholders — replace it with your ow
 
 
 <Note>
-  **The `__js_` prefix is required.** To set embedded data from JavaScript, Qualtrics requires the field declared in **Survey Flow** to be prefixed with `__js_`, while the call to `setJSEmbeddedData` uses the name without the prefix (`"ROUNDTABLE_SESSION_ID"`).
+  **The `__js_` prefix is required.** To set embedded data from JavaScript, Qualtrics requires the field declared in **Survey Flow** to be prefixed with `__js_`, while the call to `setJSEmbeddedData` uses the name without the prefix (`"POH_SESSION_ID"`).
 </Note>
 
 ## Retrieving session data
 
-The script above saves the current session ID into the `__js_ROUNDTABLE_SESSION_ID` embedded data field. To pull the risk score and flags for a respondent back into your survey, you can call the session report endpoint from a Qualtrics Web Service task.
+The script above saves the current session ID into the `__js_POH_SESSION_ID` embedded data field. To pull the risk score and flags for a respondent back into your survey, you can call the session report endpoint from a Qualtrics Web Service task.
 
 ### 1. Call the report endpoint with a Web Service
 
@@ -78,7 +78,7 @@ In **Survey Flow**, add a **Web Service** element at the end of the survey and s
 
 - **Method:** `GET`
 - **URL:** `https://api.poh.org/v1/sessions/report`
-- **Query parameter:** `sessionId` = `${e://Field/__js_ROUNDTABLE_SESSION_ID}`
+- **Query parameter:** `sessionId` = `${e://Field/__js_POH_SESSION_ID}`
 - **Header:** `Authorization` = `Bearer YOUR_SECRET_KEY`
 
 You can get your secret key from the [Secret keys](https://app.poh.org/account/api-keys) dashboard page for the `Authorization` header (the secret key starts with `sk-`).

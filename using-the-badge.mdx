@@ -3,7 +3,7 @@ title: 'Using the Proof of Human badge'
 sidebarTitle: 'Using the Proof of Human badge'
 ---
 
-Proof of Human's verification badge is a small, drop-in widget that shows whether Proof of Human is running. It auto-renders wherever you place `<div class="roundtable-badge">`, listens to your tracker’s events, and gracefully handles SPAs and back-navigation.
+Proof of Human's verification badge is a small, drop-in widget that shows whether Proof of Human is running. It auto-renders wherever you place `<div class="poh-badge">`, listens to your tracker’s events, and gracefully handles SPAs and back-navigation.
 
 Note that the badge does *not* display any results related to risk score. Instead, it determines success or failure based on whether the Proof of Human tracking is working correctly.
 
@@ -21,15 +21,17 @@ We recommend adding the tracker and the badge script on the same page, with the 
 ></script>
 
 <!-- Badge -->
-<div class="roundtable-badge"></div>
+<div class="poh-badge"></div>
 <script src="https://cdn.poh.org/v1/badge.js"></script>
 ```
 
-After importing the badge script, the badge can be added anywhere by adding a div with the class `roundtable-badge`:
+After importing the badge script, the badge can be added anywhere by adding a div with the class `poh-badge`:
 
 ```html
-<div class="roundtable-badge"></div>
+<div class="poh-badge"></div>
 ```
+
+The older `roundtable-badge` class name still works, so existing pages do not need to change.
 
 ## Styling
 
