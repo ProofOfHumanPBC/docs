@@ -59,7 +59,7 @@ p.Params1  = dict(sessionId=p.get('client_poh_session_id', ''))
 p.Headers1 = dict(Authorization="Bearer YOUR_SECRET_KEY")
 </exec>
 
-<logic label="Roundtable_API"
+<logic label="POH_API"
   cond="p.get('client_poh_session_id', '') != ''"
   api:params="p.Params1"
   api:headers="p.Headers1"
@@ -75,7 +75,7 @@ Pass the captured session ID as the `sessionId` query parameter, and your secret
 
 ### 2. Save the response
 
-After calling the API, Roundtable_API.r holds the parsed JSON response. Read the fields you want to track and store them in a hidden text question:
+After calling the API, POH_API.r holds the parsed JSON response. Read the fields you want to track and store them in a hidden text question:
 
 ```xml
 <exec>
@@ -88,13 +88,13 @@ def to_ascii(v):
         return v.encode('ascii', 'replace')
     return v
 
-rt_data.d1.val = Roundtable_API.r.get('risk_score', 'NA')
-rt_data.d2.val = to_ascii(Roundtable_API.r.get('risk_explanation', 'NA'))
-rt_data.d3.val = to_ascii(Roundtable_API.r.get('recommended_action', 'NA'))
+rt_data.d1.val = POH_API.r.get('risk_score', 'NA')
+rt_data.d2.val = to_ascii(POH_API.r.get('risk_explanation', 'NA'))
+rt_data.d3.val = to_ascii(POH_API.r.get('recommended_action', 'NA'))
 </exec>
 
 <text label="rt_data" optional="0" size="25" where="execute,survey,report">
-  <title>Roundtable risk data</title>
+  <title>Proof of Human risk data</title>
   <row label="d1">risk_score</row>
   <row label="d2">risk_explanation</row>
   <row label="d3">recommended_action</row>
