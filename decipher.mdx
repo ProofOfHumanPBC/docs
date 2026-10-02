@@ -17,7 +17,7 @@ Add the following as a top-level element in your survey XML. Placing it at the t
 <style name="respview.client.js" mode="after">
 <![CDATA[
 <!-- Proof of Human API Script -->
-<script src="https://cdn.poh.org/v1/rt.js" data-site-key="YOUR_SITE_KEY"></script>
+<script src="https://cdn.poh.org/v1/poh.js" data-site-key="YOUR_SITE_KEY"></script>
 <!-- End Proof of Human API Script -->
 ]]>
 </style>
@@ -30,18 +30,18 @@ To retrieve a respondent's data later, you need their session ID. Add the follow
 ```xml
 <style name="question.after" wrap="ready"><![CDATA[
 function saveSid() {
-  var sid = window.getRoundtableSessionId && window.getRoundtableSessionId();
+  var sid = window.getPOHSessionId && window.getPOHSessionId();
   if (!sid) return false;
-  Survey.setPersistent('client_roundtable_session_id', sid);
+  Survey.setPersistent('client_poh_session_id', sid);
   return true;
 }
 if (!saveSid()) {
-  window.addEventListener('roundtable:ready', saveSid, { once: true });
+  window.addEventListener('poh:ready', saveSid, { once: true });
 }
 ]]></style>
 ```
 
-This gets the session ID with `window.getRoundtableSessionId()` and makes it available server-side as `p.client_roundtable_session_id`.
+This gets the session ID with `window.getPOHSessionId()` and makes it available server-side as `p.client_poh_session_id`.
 
 <Note>
  Attach this code to a question the respondent answers and submits — not to a terminal or exit page.
@@ -49,18 +49,18 @@ This gets the session ID with `window.getRoundtableSessionId()` and makes it ava
 
 ## Retrieving session data
 
-The question code above saves the session ID to `p.client_roundtable_session_id`. To pull the risk score and flags for a respondent back into your survey, call the session report endpoint from a Decipher API node. Place this after the last page you'd like to track.
+The question code above saves the session ID to `p.client_poh_session_id`. To pull the risk score and flags for a respondent back into your survey, call the session report endpoint from a Decipher API node. Place this after the last page you'd like to track.
 
 ### 1. Call the report endpoint
 
 ```xml
 <exec>
-p.Params1  = dict(sessionId=p.get('client_roundtable_session_id', ''))
+p.Params1  = dict(sessionId=p.get('client_poh_session_id', ''))
 p.Headers1 = dict(Authorization="Bearer YOUR_SECRET_KEY")
 </exec>
 
-<logic label="Roundtable_API"
-  cond="p.get('client_roundtable_session_id', '') != ''"
+<logic label="POH_API"
+  cond="p.get('client_poh_session_id', '') != ''"
   api:params="p.Params1"
   api:headers="p.Headers1"
   api:url="https://api.poh.org/v1/sessions/report"
@@ -75,7 +75,7 @@ Pass the captured session ID as the `sessionId` query parameter, and your secret
 
 ### 2. Save the response
 
-After calling the API, Roundtable_API.r holds the parsed JSON response. Read the fields you want to track and store them in a hidden text question:
+After calling the API, POH_API.r holds the parsed JSON response. Read the fields you want to track and store them in a hidden text question:
 
 ```xml
 <exec>
@@ -88,13 +88,13 @@ def to_ascii(v):
         return v.encode('ascii', 'replace')
     return v
 
-rt_data.d1.val = Roundtable_API.r.get('risk_score', 'NA')
-rt_data.d2.val = to_ascii(Roundtable_API.r.get('risk_explanation', 'NA'))
-rt_data.d3.val = to_ascii(Roundtable_API.r.get('recommended_action', 'NA'))
+rt_data.d1.val = POH_API.r.get('risk_score', 'NA')
+rt_data.d2.val = to_ascii(POH_API.r.get('risk_explanation', 'NA'))
+rt_data.d3.val = to_ascii(POH_API.r.get('recommended_action', 'NA'))
 </exec>
 
 <text label="rt_data" optional="0" size="25" where="execute,survey,report">
-  <title>Roundtable risk data</title>
+  <title>Proof of Human risk data</title>
   <row label="d1">risk_score</row>
   <row label="d2">risk_explanation</row>
   <row label="d3">recommended_action</row>

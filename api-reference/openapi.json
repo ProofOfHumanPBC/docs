@@ -27,7 +27,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "The unique session identifier (from `window.getRoundtableSessionId()`)"
+            "description": "The unique session identifier (from `window.getPOHSessionId()`)"
           }
         ],
         "responses": {
@@ -329,7 +329,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "The unique session identifier (from `window.getRoundtableSessionId()`)"
+            "description": "The unique session identifier (from `window.getPOHSessionId()`)"
           }
         ],
         "responses": {
@@ -1067,7 +1067,7 @@
         "schema": {
           "type": "string"
         },
-        "description": "The unique session identifier (from `window.getRoundtableSessionId()`)"
+        "description": "The unique session identifier (from `window.getPOHSessionId()`)"
       },
       "UserIdParam": {
         "name": "userId",

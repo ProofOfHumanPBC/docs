@@ -9,7 +9,7 @@ This guide shows how to integrate Proof of Human’s bot detection suite into an
 
 ```html
 <script
-  src="https://cdn.poh.org/v1/rt.js"
+  src="https://cdn.poh.org/v1/poh.js"
   data-site-key="YOUR_SITE_KEY"
   data-user-id="OPTIONAL_USER_ID"
   data-tags="OPTIONAL_TAG"
@@ -18,12 +18,12 @@ This guide shows how to integrate Proof of Human’s bot detection suite into an
 
 <!-- 2 ‑ (optionally) set / update the UID when the tracker is ready (skip if you used data-user-id) -->
 <script>
-  const setUid = () => window.setRoundtableUserId?.('USER_ID');  // Only runs if script is ready
+  const setUid = () => window.setPOHUserId?.('USER_ID');  // Only runs if script is ready
   setUid(); // Try right away
-  window.addEventListener('roundtable:ready', setUid, { once:true }); // Try again once if event fires
+  window.addEventListener('poh:ready', setUid, { once:true }); // Try again once if event fires
 </script>
 ```
-The Proof of Human tracker dispatches a **`roundtable:ready`** event on `window` as soon as it is done loading. Block 2 listens for that completion event so you can safely call `window.setRoundtableUserId` once the tracker is loaded.
+The Proof of Human tracker dispatches a **`poh:ready`** event on `window` as soon as it is done loading. Block 2 listens for that completion event so you can safely call `window.setPOHUserId` once the tracker is loaded.
 
 ### Script‑tag attributes
 
@@ -38,15 +38,15 @@ The tracker recognizes three data‑attributes that let you tailor the tracker's
 The Proof of Human tracker exposes two functions to manually set extra tracking information. These are useful in React or single-page apps.
 
 ```ts
-window.setRoundtableUserId(uid);
-window.setRoundtableTags(["my_tag_1", "my_tag_2"]);
+window.setPOHUserId(uid);
+window.setPOHTags(["my_tag_1", "my_tag_2"]);
 ```
 
 First, add the Proof of Human tracking script in `public/index.html`:
 
 ```html
 <script
-  src="https://cdn.poh.org/v1/rt.js"
+  src="https://cdn.poh.org/v1/poh.js"
   data-site-key="YOUR_SITE_KEY">
 </script>
 ```
@@ -54,24 +54,24 @@ First, add the Proof of Human tracking script in `public/index.html`:
 Then wire the user ID in React:
 
 ```ts
-// useRoundtableUid.tsx
+// usePOHUid.tsx
 import { useEffect } from 'react';
 
-export const useRoundtableUid = (uid?: string) => {
+export const usePOHUid = (uid?: string) => {
   useEffect(() => {
     if (!uid) return;
 
     const send = () => {
-      if (window.setRoundtableUserId) {
-        window.setRoundtableUserId(uid);
+      if (window.setPOHUserId) {
+        window.setPOHUserId(uid);
         return true;             // tracker ready
       }
       return false;              // not yet
     };
 
     if (send()) return;          // ran instantly
-    window.addEventListener('roundtable:ready', send, { once: true });
-    return () => window.removeEventListener('roundtable:ready', send);
+    window.addEventListener('poh:ready', send, { once: true });
+    return () => window.removeEventListener('poh:ready', send);
   }, [uid]);
 };
 ```
@@ -80,18 +80,18 @@ Call the hook in your auth/provider component; it runs every time `currentUser` 
 
 ```tsx
 const { currentUser } = useAuth();
-useRoundtableUid(currentUser?.uid);
+usePOHUid(currentUser?.uid);
 ```
 
 ### Using the Session ID
 
-Every page‑view (or SPA session) gets a unique **session ID** that can be retrieved with `window.getRoundtableSessionId()`.
+Every page‑view (or SPA session) gets a unique **session ID** that can be retrieved with `window.getPOHSessionId()`.
 You can reference this ID to pull risk scores and data from the session in your back end.
 
 ```js
 // Access the session ID anywhere in the front end
-const sessionId = window.getRoundtableSessionId();
-console.log('Roundtable session:', sessionId);
+const sessionId = window.getPOHSessionId();
+console.log('POH session:', sessionId);
 ```
 
 Because the session ID is stored in *sessionStorage*, the value is scoped to the current tab and cleared automatically when the tab is closed.
