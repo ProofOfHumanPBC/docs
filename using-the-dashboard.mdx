@@ -40,16 +40,13 @@ Device checks
 
 ### Attention checks
 
-Attention checks look for signs of low effort or inattention. Unlike biometric and device checks, they are designed to catch **inattentive human participants, not bots**: a real person who rushes through, wanders off, or pastes answers in can still produce poor-quality data.
+Attention checks look for signs of low effort or inattention. Unlike biometric and device checks, they are designed to catch inattentive human participants, not bots.
 
-Attention checks **do not contribute to the risk score**. They are shown alongside the other checks in the session details and on the dashboard home page, and returned in the `attention_checks` field of the API, so you can decide how to treat them, for example by excluding inattentive responses during data cleaning.
-
-- **Switched away** – The page was hidden 5 or more times, for example by switching to another tab or window
-- **Rushed through** – The typical time between actions was under 0.66 seconds, about a third of the typical pace across all apps. Events logged within a split second of each other count as one action, and sessions with fewer than 10 actions are not judged
+Attention checks do not contribute to the risk score. They are shown alongside the other checks in the session details and on the dashboard home page, and returned in the `attention_checks` field of the API, so you can decide how to treat them, for example by excluding data from inattentive participants.
+- **Switched away** – The user left the page multiple times, for example by switching to another tab or window
+- **Long pauses** – The user stopped interacting with the page for a long time
 - **Pasted answers** – At least one answer was pasted rather than typed
-- **Long pauses** – There was a gap of more than 10 minutes between two consecutive actions
-
-Sessions processed before attention checks were introduced report `Unknown` for each attention check in the API.
+- **Rushed through** – The user moved through the page with extremely fast actions
 
 ### Viewing session details
 
