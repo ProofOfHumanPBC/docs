@@ -18,7 +18,7 @@
     "/v1/sessions/{sessionId}/report": {
       "get": {
         "summary": "Retrieve data for a specific session",
-        "description": "Get the risk score, risk explanation, biometric checks, and device checks for a specific session ID. The `user_logs` field is also included for backward compatibility but is deprecated — use the [`/v1/sessions/{sessionId}/events`](/api-reference/events-data) endpoint to retrieve a session's event log.",
+        "description": "Get the risk score, risk explanation, biometric checks, device checks, and attention checks for a specific session ID. The `user_logs` field is also included for backward compatibility but is deprecated — use the [`/v1/sessions/{sessionId}/events`](/api-reference/events-data) endpoint to retrieve a session's event log.",
         "parameters": [
           {
             "name": "sessionId",
@@ -307,6 +307,58 @@
                         "vpn": "Detected",
                         "tor": "Not detected",
                         "location_spoofing": "Unknown"
+                      }
+                    },
+                    "attention_checks": {
+                      "type": "object",
+                      "description": "Results of attention checks for signs of low effort or inattention. These flag inattentive human participants, not bots, and do not contribute to the risk score. Sessions processed before attention checks were introduced report `Unknown`",
+                      "properties": {
+                        "switched_away": {
+                          "type": "string",
+                          "description": "The page was hidden 5 or more times, for example by switching to another tab or window",
+                          "enum": [
+                            "Detected",
+                            "Not detected",
+                            "Unknown"
+                          ],
+                          "example": "Not detected"
+                        },
+                        "rushed_through": {
+                          "type": "string",
+                          "description": "The typical time between actions was under 0.66 seconds, about a third of the typical pace across all apps. Sessions with fewer than 10 actions are not judged",
+                          "enum": [
+                            "Detected",
+                            "Not detected",
+                            "Unknown"
+                          ],
+                          "example": "Not detected"
+                        },
+                        "any_pasted": {
+                          "type": "string",
+                          "description": "At least one answer was pasted rather than typed",
+                          "enum": [
+                            "Detected",
+                            "Not detected",
+                            "Unknown"
+                          ],
+                          "example": "Detected"
+                        },
+                        "long_pauses": {
+                          "type": "string",
+                          "description": "There was a gap of more than 10 minutes between two consecutive actions",
+                          "enum": [
+                            "Detected",
+                            "Not detected",
+                            "Unknown"
+                          ],
+                          "example": "Not detected"
+                        }
+                      },
+                      "example": {
+                        "switched_away": "Not detected",
+                        "rushed_through": "Not detected",
+                        "any_pasted": "Detected",
+                        "long_pauses": "Not detected"
                       }
                     }
                   }
@@ -681,6 +733,58 @@
                               "tor": "Not detected",
                               "location_spoofing": "Unknown"
                             }
+                          },
+                          "attention_checks": {
+                            "type": "object",
+                            "description": "Results of attention checks for signs of low effort or inattention. These flag inattentive human participants, not bots, and do not contribute to the risk score. Sessions processed before attention checks were introduced report `Unknown`",
+                            "properties": {
+                              "switched_away": {
+                                "type": "string",
+                                "description": "The page was hidden 5 or more times, for example by switching to another tab or window",
+                                "enum": [
+                                  "Detected",
+                                  "Not detected",
+                                  "Unknown"
+                                ],
+                                "example": "Not detected"
+                              },
+                              "rushed_through": {
+                                "type": "string",
+                                "description": "The typical time between actions was under 0.66 seconds, about a third of the typical pace across all apps. Sessions with fewer than 10 actions are not judged",
+                                "enum": [
+                                  "Detected",
+                                  "Not detected",
+                                  "Unknown"
+                                ],
+                                "example": "Not detected"
+                              },
+                              "any_pasted": {
+                                "type": "string",
+                                "description": "At least one answer was pasted rather than typed",
+                                "enum": [
+                                  "Detected",
+                                  "Not detected",
+                                  "Unknown"
+                                ],
+                                "example": "Detected"
+                              },
+                              "long_pauses": {
+                                "type": "string",
+                                "description": "There was a gap of more than 10 minutes between two consecutive actions",
+                                "enum": [
+                                  "Detected",
+                                  "Not detected",
+                                  "Unknown"
+                                ],
+                                "example": "Not detected"
+                              }
+                            },
+                            "example": {
+                              "switched_away": "Not detected",
+                              "rushed_through": "Not detected",
+                              "any_pasted": "Detected",
+                              "long_pauses": "Not detected"
+                            }
                           }
                         }
                       }
@@ -974,6 +1078,58 @@
                               "vpn": "Detected",
                               "tor": "Not detected",
                               "location_spoofing": "Unknown"
+                            }
+                          },
+                          "attention_checks": {
+                            "type": "object",
+                            "description": "Results of attention checks for signs of low effort or inattention. These flag inattentive human participants, not bots, and do not contribute to the risk score. Sessions processed before attention checks were introduced report `Unknown`",
+                            "properties": {
+                              "switched_away": {
+                                "type": "string",
+                                "description": "The page was hidden 5 or more times, for example by switching to another tab or window",
+                                "enum": [
+                                  "Detected",
+                                  "Not detected",
+                                  "Unknown"
+                                ],
+                                "example": "Not detected"
+                              },
+                              "rushed_through": {
+                                "type": "string",
+                                "description": "The typical time between actions was under 0.66 seconds, about a third of the typical pace across all apps. Sessions with fewer than 10 actions are not judged",
+                                "enum": [
+                                  "Detected",
+                                  "Not detected",
+                                  "Unknown"
+                                ],
+                                "example": "Not detected"
+                              },
+                              "any_pasted": {
+                                "type": "string",
+                                "description": "At least one answer was pasted rather than typed",
+                                "enum": [
+                                  "Detected",
+                                  "Not detected",
+                                  "Unknown"
+                                ],
+                                "example": "Detected"
+                              },
+                              "long_pauses": {
+                                "type": "string",
+                                "description": "There was a gap of more than 10 minutes between two consecutive actions",
+                                "enum": [
+                                  "Detected",
+                                  "Not detected",
+                                  "Unknown"
+                                ],
+                                "example": "Not detected"
+                              }
+                            },
+                            "example": {
+                              "switched_away": "Not detected",
+                              "rushed_through": "Not detected",
+                              "any_pasted": "Detected",
+                              "long_pauses": "Not detected"
                             }
                           }
                         }
