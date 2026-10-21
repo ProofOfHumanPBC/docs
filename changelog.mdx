@@ -6,6 +6,9 @@ description: "Latest updates and improvements to Proof of Human."
 ## October 2026
 
 <AccordionGroup>
+  <Accordion title="New: Attention checks">
+    Added four [attention checks](/using-the-dashboard#attention-checks) that flag signs of low effort or inattention from human participants: `switched_away`, `rushed_through`, `any_pasted`, and `long_pauses`. Attention checks are informational only and do not contribute to the risk score. They are shown on the dashboard and returned in the new `attention_checks` field on the session, user, and tag API endpoints.
+  </Accordion>
   <Accordion title="Update: POH-branded tracker and badge names">
     The tracker's public functions and events now use Proof of Human names: `window.setPOHUserId`, `window.setPOHTags`, `window.getPOHSessionId`, and the `poh:ready` / `poh:session-token` events. The tracker script is now served at `https://cdn.poh.org/v1/poh.js`. The previous Roundtable-branded names and the `rt.js` script URL continue to work, so no changes are required to existing integrations.
   </Accordion>

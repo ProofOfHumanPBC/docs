@@ -38,9 +38,19 @@ Device checks
 - **TOR** – The user's connection is routed through a Tor exit node
 - **Location spoofing** – The user's browser-reported GPS coordinates conflict with the IP-inferred location
 
+### Attention checks
+
+Attention checks look for signs of low effort or inattention. Unlike biometric and device checks, they are designed to catch inattentive human participants, not bots.
+
+Attention checks do not contribute to the risk score. They are shown alongside the other checks in the session details and on the dashboard home page, and returned in the `attention_checks` field of the API, so you can decide how to treat them, for example by excluding data from inattentive participants.
+- **Switched away** – The user left the page multiple times, for example by switching to another tab or window
+- **Long pauses** – The user stopped interacting with the page for a long time
+- **Pasted answers** – At least one answer was pasted rather than typed
+- **Rushed through** – The user moved through the page with extremely fast actions
+
 ### Viewing session details
 
-Click on any session row to open a Session Overview modal. Here, you can view the risk scores, risk explanation, complete user action log, and biometric and device checks.
+Click on any session row to open a Session Overview modal. Here, you can view the risk scores, risk explanation, complete user action log, and biometric, device, and attention checks.
 
 ![Session Detail Modal](./images/dashboard.png)
 
