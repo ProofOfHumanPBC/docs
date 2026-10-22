@@ -1281,7 +1281,7 @@
         }
       },
       "FreePlan": {
-        "description": "The API is not available on the Free plan. Upgrade to [Pay as you go or Academic](/plans) to use it.",
+        "description": "The API is not available on the Free plan. Upgrade to a [paid plan](/plans) to use it.",
         "content": {
           "application/json": {
             "schema": {
@@ -1326,7 +1326,7 @@
         }
       },
       "FreePlanList": {
-        "description": "The API is not available on the Free plan. Upgrade to [Pay as you go or Academic](/plans) to use it. Sessions collected on the Free plan are left out of the results, even after upgrading.",
+        "description": "The API is not available on the Free plan. Upgrade to a [paid plan](/plans) to use it. Sessions collected on the Free plan are left out of the results, even after upgrading.",
         "content": {
           "application/json": {
             "schema": {
