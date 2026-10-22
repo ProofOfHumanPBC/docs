@@ -365,6 +365,12 @@
                 }
               }
             }
+          },
+          "402": {
+            "$ref": "#/components/responses/AccountInactive"
+          },
+          "403": {
+            "$ref": "#/components/responses/FreePlanSession"
           }
         }
       }
@@ -447,6 +453,12 @@
                 }
               }
             }
+          },
+          "402": {
+            "$ref": "#/components/responses/AccountInactive"
+          },
+          "403": {
+            "$ref": "#/components/responses/FreePlanSession"
           }
         }
       }
@@ -793,6 +805,12 @@
                 }
               }
             }
+          },
+          "402": {
+            "$ref": "#/components/responses/AccountInactiveList"
+          },
+          "403": {
+            "$ref": "#/components/responses/FreePlanList"
           }
         }
       }
@@ -1139,6 +1157,12 @@
                 }
               }
             }
+          },
+          "402": {
+            "$ref": "#/components/responses/AccountInactiveList"
+          },
+          "403": {
+            "$ref": "#/components/responses/FreePlanList"
           }
         }
       }
@@ -1242,6 +1266,87 @@
           "type": "string"
         },
         "description": "The tag to filter sessions by"
+      }
+    },
+    "responses": {
+      "AccountInactive": {
+        "description": "The account's subscription is inactive. Update your plan on the [Plan page](https://app.poh.org/account/plan) to restore API access.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "string"
+            },
+            "example": "Account inactive - please update your plan"
+          }
+        }
+      },
+      "FreePlan": {
+        "description": "The API is not available on the Free plan. Upgrade to [Pay as you go or Academic](/plans) to use it.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "string"
+            },
+            "example": "API access is not available on the free plan - please upgrade your plan"
+          }
+        }
+      },
+      "FreePlanSession": {
+        "description": "The API is not available on the Free plan, or the session was collected while the account was on the Free plan. Sessions collected on the Free plan stay locked after upgrading. See [Plans and limits](/plans).",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "string"
+            },
+            "example": "Session was collected on the free plan - details are not available"
+          }
+        }
+      },
+      "AccountInactiveList": {
+        "description": "The account's subscription is inactive. Update your plan on the [Plan page](https://app.poh.org/account/plan) to restore API access.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "disabled": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "error": {
+                  "type": "string"
+                }
+              }
+            },
+            "example": {
+              "disabled": true,
+              "error": "Account inactive - please update your plan"
+            }
+          }
+        }
+      },
+      "FreePlanList": {
+        "description": "The API is not available on the Free plan. Upgrade to [Pay as you go or Academic](/plans) to use it. Sessions collected on the Free plan are left out of the results, even after upgrading.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "disabled": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "error": {
+                  "type": "string"
+                }
+              }
+            },
+            "example": {
+              "disabled": true,
+              "error": "API access is not available on the free plan - please upgrade your plan"
+            }
+          }
+        }
       }
     }
   },
