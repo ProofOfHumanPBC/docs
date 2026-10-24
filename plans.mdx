@@ -3,53 +3,55 @@ title: 'Plans and limits'
 sidebarTitle: 'Plans and limits'
 ---
 
-The Free plan gives you observability: it scores every session and shows you aggregate bot and attention trends across your routes and tags. Paid plans add session-level details, so you can review individual sessions on the dashboard and pull their data through the API.
+The Community plan is free and gives you observability: it scores every session and shows you aggregate bot and attention trends across your routes and tags. Paid plans add session-level details, so you can review individual sessions on the dashboard and pull their data through the API.
 
-You can choose between Free and Pay as you go when you sign up and change at any time on the [Plan page](https://app.poh.org/account/plan) of your account. For large volumes, we offer custom Enterprise agreements.
+You choose between Community and Base after you sign up and verify your email, and you can change plans later on the [Plan page](https://app.poh.org/account/plan) of your account. For large volumes, we offer custom Business agreements.
 
 ## Comparing plans
 
-|  | Free | Pay as you go | Enterprise |
+|  | Community | Base | Business |
 |---|---|---|---|
 | **Price** | Free, no card needed | $0.25 per session, no base fee | Custom |
-| **Sessions** | Up to 100,000 per month (see [Monthly session limit](#monthly-session-limit-on-the-free-plan)) | Unlimited, billed monthly per session | Custom volume |
+| **Sessions** | Up to 100,000 per month (see [Monthly session limit](#monthly-session-limit-on-the-community-plan)) | Unlimited, billed monthly per session | Custom volume |
 | **Home dashboard** | ✓ | ✓ | ✓ |
 | **Route and tag summaries** | Totals only | Full breakdowns | Full breakdowns |
 | **Sessions, Tags, and Visitor IDs pages** | — | ✓ | ✓ |
 | **Session details** (risk explanation, action log, checks) | — | ✓ | ✓ |
+| **Shareable session and summary links** | — | ✓ | ✓ |
+| **Custom flag weights** | View only | ✓ | ✓ |
 | **[API access](/accessing-session-data)** | — | ✓ | ✓ |
 | **How to get it** | [Sign up](https://app.poh.org) | [Sign up](https://app.poh.org) | [Contact us](mailto:sales@poh.org) |
 
-For large volumes, contact us at sales@poh.org about an Enterprise agreement.
+For large volumes, contact us at sales@poh.org about a Business agreement.
 
-## What's included on the Free plan
+## What's included on the Community plan
 
-The Free plan runs the full Proof of Human tracker on your site, so every session is scored the same way as on a paid plan. You see the results in aggregate on the home dashboard and in the totals at the top of each route and tag summary.
+The Community plan runs the full Proof of Human tracker on your site, so every session is scored the same way as on a paid plan. You see the results in aggregate on the home dashboard and in the totals at the top of each route and tag summary.
 
-The Sessions, Tags, and Visitor IDs pages, the detailed breakdowns in route and tag summaries (bot detection, device and network checks, repeat visitors, recent history, and locations), session details, and the [API](/accessing-session-data) are only available on Pay as you go and Enterprise plans. Free accounts don't have API keys. API requests from a Free account return `403` with the message `API access is not available on the free plan - please upgrade your plan`.
+The Sessions, Tags, and Visitor IDs pages, the detailed breakdowns in route and tag summaries (bot detection, device and network checks, repeat visitors, recent history, and locations), session details, share links, changes to flag weights, and the [API](/accessing-session-data) are only available on Base and Business plans. Community accounts can see the default flag weights but not change them, and don't have API keys. API requests from a Community account return `403` with the message `API access is not available on the free plan - please upgrade your plan`.
 
-### Monthly session limit on the Free plan
+### Monthly session limit on the Community plan
 
-Free accounts can collect up to **100,000 sessions per month**. The month starts on the day and time you signed up (in UTC), not on the 1st of the calendar month. For example, an account created on March 14 resets on the 14th of every month. Accounts created on the 29th, 30th, or 31st reset on the last day of shorter months.
+Community accounts can collect up to **100,000 sessions per month**. The month starts on the day and time you signed up (in UTC), not on the 1st of the calendar month. For example, an account created on March 14 resets on the 14th of every month. Accounts created on the 29th, 30th, or 31st reset on the last day of shorter months.
 
 <Warning>
   Once you reach the limit, new sessions are not collected until your next month starts. The tracker still loads on your pages, but those sessions are not recorded, scored, or shown on the dashboard, and they cannot be recovered later. Sessions already in progress when you reach the limit are recorded in full. If you expect more than 100,000 sessions a month, upgrade before you launch.
 </Warning>
 
-### Sessions collected on the Free plan stay locked
+### Sessions collected on the Community plan stay locked
 
-Session details for sessions collected while your account is on the Free plan are never available, even after you upgrade. After upgrading:
+Session details for sessions collected while your account is on the Community plan are never available, even after you upgrade. After upgrading:
 
 - Sessions collected on a paid plan show full details on the dashboard and through the API.
-- Sessions collected on the Free plan stay locked. The API leaves them out of the [user](/api-reference/user-data) and [tag](/api-reference/tag-data) endpoints, and the [session](/api-reference/session-data) and [events](/api-reference/events-data) endpoints return `403` with the message `Session was collected on the free plan - details are not available`.
+- Sessions collected on the Community plan stay locked. The API leaves them out of the [user](/api-reference/user-data) and [tag](/api-reference/tag-data) endpoints, and the [session](/api-reference/session-data) and [events](/api-reference/events-data) endpoints return `403` with the message `Session was collected on the free plan - details are not available`.
 
 If you need session-level data for a study or launch, switch to a paid plan before you start collecting.
 
 ## Changing plans
 
-Account admins can switch between Free and Pay as you go on the [Plan page](https://app.poh.org/account/plan). Changes take effect immediately.
+Account admins manage plans on the [Plan page](https://app.poh.org/account/plan).
 
-- **Free to Pay as you go**: you are asked to add a card, and your subscription starts as soon as it's saved. Sessions collected from then on include full details.
-- **Pay as you go to Free**: your subscription is canceled right away and you are billed for the sessions used so far. Free plan limits apply from that moment on.
+- **Community to Base**: choose **Upgrade plan** and add a card. Your subscription starts as soon as the card is saved, and sessions collected from then on include full details.
+- **Base to Community**: cancel your subscription from **Manage plan**. You keep Base until the end of the current billing period and are billed for the sessions used. Your account then moves to the Community plan. While on Community, session details and API access are unavailable for all sessions. Sessions collected on Base become available again if you upgrade later.
 
-To move to or from an Enterprise agreement, contact us at sales@poh.org.
+To move to or from a Business agreement, contact us at sales@poh.org.
