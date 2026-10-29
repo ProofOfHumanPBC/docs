@@ -17,13 +17,13 @@
             "group": "Getting Started",
             "pages": [
               "introduction",
+              "how-it-works",
               "plans"
             ]
           },
           {
             "group": "Set up",
             "pages": [
-              "how-it-works",
               "integration",
               "accessing-session-data",
               "using-the-badge",
